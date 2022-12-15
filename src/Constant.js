@@ -3,6 +3,8 @@ const GAME_STRING = Object.freeze({
   even: 'E',
   challenge: 'Y',
   stop: 'N',
+  number: 'NUMBER',
+  sniffling: 'SNIFFLING',
 });
 
 const GAME_NUMBER = Object.freeze({
@@ -19,7 +21,8 @@ const GAME_MESSAGE = Object.freeze({
   miniGame: `미니 게임을 위한 숫자 또는 홀/짝 커맨드를 입력해주세요. (숫자: ${GAME_NUMBER.randomStart} ~ ${GAME_NUMBER.randomEnd} 사이의 수, 홀: ${GAME_STRING.odd}, 짝: ${GAME_STRING.even})`,
   showEnforceResult: (isSuccess, percent) =>
     `강화 ${isSuccess ? '성공' : '실패'}! (강화 확률 ${percent}%)`,
-  showMiniCount: (count) => `미니 게임 랜덤 수: ${count} -->`,
+  showMiniResult: (count, result) =>
+    `미니 게임 랜덤 수: ${count} --> ${result}`,
   successNumber: `숫자 맞추기 성공! 강화 확률 ${GAME_NUMBER.successNumberPercent}% 증가!`,
   failNumber: '숫자 맞추기 실패!',
   successSniffling: `홀/짝 맞추기 성공! 강화 확률 ${GAME_NUMBER.sucessSnifflingPercent}% 증가!`,

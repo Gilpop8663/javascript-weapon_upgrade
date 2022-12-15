@@ -6,7 +6,12 @@ const {
   readChallengeCommand,
   readMiniGameInput,
 } = require('../view/InputView');
-const { printStart, printCurGrade } = require('../view/OutputView');
+const {
+  printStart,
+  printCurGrade,
+  printMiniGameNumberResult,
+  printMiniGameSniffling,
+} = require('../view/OutputView');
 
 class UpgradeGame {
   #itemGrade = new ItemGrade();
@@ -42,8 +47,24 @@ class UpgradeGame {
   checkMiniGameCommand(command) {
     Validation.miniGame(command);
     const randomNumber = generateMiniGameNumber();
-    console.log(randomNumber);
-    console.log(command);
+    const isNotNumber = Number.isNaN(Number(command));
+    if (isNotNumber) {
+      this.snifflingGame(command, randomNumber);
+      return;
+    }
+    this.matchNumberGame(command, randomNumber);
+  }
+
+  matchNumberGame(command, randomNumber) {
+    this.#itemGrade.setPercent(command, randomNumber, GAME_STRING.sniffling);
+    const isSuccess = this.#itemGrade.getIsMiniSuccess();
+    printMiniGameNumberResult(randomNumber, isSuccess);
+  }
+
+  snifflingGame(command, randomNumber) {
+    this.#itemGrade.setPercent(command, randomNumber, GAME_STRING.number);
+    const isSuccess = this.#itemGrade.getIsMiniSuccess();
+    printMiniGameSniffling(randomNumber, isSuccess);
   }
 
   endGame() {}
