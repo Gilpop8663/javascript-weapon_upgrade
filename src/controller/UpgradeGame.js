@@ -1,7 +1,10 @@
 const { GAME_STRING } = require('../Constant');
 const ItemGrade = require('../model/ItemGrade');
 const Validation = require('../Validation');
-const { readChallengeCommand } = require('../view/InputView');
+const {
+  readChallengeCommand,
+  readMiniGameInput,
+} = require('../view/InputView');
 const { printStart, printCurGrade } = require('../view/OutputView');
 
 class UpgradeGame {
@@ -31,7 +34,13 @@ class UpgradeGame {
     return this.endGame();
   }
 
-  upgrade() {}
+  upgrade() {
+    readMiniGameInput(this.checkMiniGameCommand.bind(this));
+  }
+
+  checkMiniGameCommand(command) {
+    console.log(command);
+  }
 
   endGame() {}
 }

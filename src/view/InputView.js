@@ -8,7 +8,9 @@ const InputView = {
   },
 
   // 미니 게임 숫자 혹은 커맨드
-  readMiniGameInput() {},
+  readMiniGameInput(callback) {
+    Console.readLine(`${GAME_MESSAGE.miniGame}\n`, callback);
+  },
 };
 
 module.exports = InputView;
