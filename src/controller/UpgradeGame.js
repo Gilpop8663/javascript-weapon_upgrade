@@ -39,6 +39,7 @@ class UpgradeGame {
   }
 
   checkMiniGameCommand(command) {
+    Validation.miniGame(command);
     console.log(command);
   }
 
