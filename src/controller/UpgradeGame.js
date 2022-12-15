@@ -1,3 +1,4 @@
+const { GAME_STRING } = require('../Constant');
 const ItemGrade = require('../model/ItemGrade');
 const Validation = require('../Validation');
 const { readChallengeCommand } = require('../view/InputView');
@@ -24,7 +25,15 @@ class UpgradeGame {
   checkChellengeCommand(command) {
     Validation.challengeCommand(command);
     console.log(command);
+    if (command === GAME_STRING.challenge) {
+      return this.upgrade();
+    }
+    return this.endGame();
   }
+
+  upgrade() {}
+
+  endGame() {}
 }
 
 module.exports = UpgradeGame;
