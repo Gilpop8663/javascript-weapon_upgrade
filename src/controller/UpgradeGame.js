@@ -13,6 +13,7 @@ const {
   printCurGrade,
   printMiniGameNumberResult,
   printMiniGameSniffling,
+  printUpgradeResult,
 } = require('../view/OutputView');
 
 class UpgradeGame {
@@ -73,9 +74,8 @@ class UpgradeGame {
 
   showUpgradeResult() {
     const percent = this.#itemGrade.getPercent();
-    console.log(percent);
-    const isUpgrade = isUpgraded(percent);
-    console.log(isUpgrade);
+    const isSuccess = isUpgraded(percent);
+    printUpgradeResult(isSuccess, percent);
   }
 
   endGame() {}

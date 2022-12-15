@@ -12,13 +12,16 @@ const OutputView = {
     const result = isSuccess
       ? GAME_MESSAGE.successNumber
       : GAME_MESSAGE.failNumber;
-    Console.print(GAME_MESSAGE.showMiniResult(randomNumber, result));
+    Console.print(`${GAME_MESSAGE.showMiniResult(randomNumber, result)}\n`);
   },
   printMiniGameSniffling(randomNumber, isSuccess) {
     const result = isSuccess
       ? GAME_MESSAGE.successSniffling
       : GAME_MESSAGE.failSniffling;
-    Console.print(GAME_MESSAGE.showMiniResult(randomNumber, result));
+    Console.print(`${GAME_MESSAGE.showMiniResult(randomNumber, result)}\n`);
+  },
+  printUpgradeResult(isSuccess, percent) {
+    Console.print(GAME_MESSAGE.showEnforceResult(isSuccess, percent));
   },
 };
 
