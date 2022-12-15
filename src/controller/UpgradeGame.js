@@ -59,12 +59,19 @@ class UpgradeGame {
     this.#itemGrade.setPercent(command, randomNumber, GAME_STRING.sniffling);
     const isSuccess = this.#itemGrade.getIsMiniSuccess();
     printMiniGameNumberResult(randomNumber, isSuccess);
+    this.showUpgradeResult();
   }
 
   snifflingGame(command, randomNumber) {
     this.#itemGrade.setPercent(command, randomNumber, GAME_STRING.number);
     const isSuccess = this.#itemGrade.getIsMiniSuccess();
     printMiniGameSniffling(randomNumber, isSuccess);
+    this.showUpgradeResult();
+  }
+
+  showUpgradeResult() {
+    const percent = this.#itemGrade.getPercent();
+    console.log(percent);
   }
 
   endGame() {}
