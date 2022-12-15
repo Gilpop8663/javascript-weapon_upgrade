@@ -13,6 +13,10 @@ class ItemGrade {
     this.#grade = 0;
   }
 
+  setGrade() {
+    this.#grade += 1;
+  }
+
   setPercent(command, randomNumber, kind) {
     if (ItemGrade.isSuccess(command, randomNumber)) {
       this.successMiniGame(kind);
@@ -24,6 +28,10 @@ class ItemGrade {
   }
 
   getPercent() {
+    const hundredPercent = 100;
+    if (hundredPercent < this.#curPercent) {
+      return hundredPercent;
+    }
     return this.#curPercent;
   }
 

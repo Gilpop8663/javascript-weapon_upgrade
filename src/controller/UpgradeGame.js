@@ -2,7 +2,6 @@ const { GAME_STRING } = require('../Constant');
 const generateMiniGameNumber = require('../generateMiniGameNumber');
 const ItemGrade = require('../model/ItemGrade');
 const { isUpgraded } = require('../UpgradeUtils');
-const UpgradeUtils = require('../UpgradeUtils');
 const Validation = require('../Validation');
 const {
   readChallengeCommand,
@@ -14,6 +13,8 @@ const {
   printMiniGameNumberResult,
   printMiniGameSniffling,
   printUpgradeResult,
+  printGameResult,
+  printMessage,
 } = require('../view/OutputView');
 
 class UpgradeGame {
@@ -35,8 +36,16 @@ class UpgradeGame {
   }
 
   checkChellengeCommand(command) {
-    Validation.challengeCommand(command);
-    console.log(command);
+    try {
+      Validation.challengeCommand(command);
+      this.challengeCommandBranch(command);
+    } catch (error) {
+      printMessage(error.message);
+      readChallengeCommand(this.checkChellengeCommand.bind(this));
+    }
+  }
+
+  challengeCommandBranch(command) {
     if (command === GAME_STRING.challenge) {
       return this.upgrade();
     }
@@ -48,7 +57,16 @@ class UpgradeGame {
   }
 
   checkMiniGameCommand(command) {
-    Validation.miniGame(command);
+    try {
+      Validation.miniGame(command);
+      this.miniGameCommandBranch(command);
+    } catch (error) {
+      printMessage(error.message);
+      readMiniGameInput(this.checkMiniGameCommand.bind(this));
+    }
+  }
+
+  miniGameCommandBranch(command) {
     const randomNumber = generateMiniGameNumber();
     const isNotNumber = Number.isNaN(Number(command));
     if (isNotNumber) {
@@ -76,9 +94,21 @@ class UpgradeGame {
     const percent = this.#itemGrade.getPercent();
     const isSuccess = isUpgraded(percent);
     printUpgradeResult(isSuccess, percent);
+    this.moreGameOrEndGame(isSuccess);
   }
 
-  endGame() {}
+  moreGameOrEndGame(isSuccess) {
+    if (isSuccess) {
+      this.#itemGrade.setGrade();
+      return this.askUpgrade();
+    }
+    return this.endGame();
+  }
+
+  endGame() {
+    const grade = this.#itemGrade.getGrade();
+    printGameResult(grade);
+  }
 }
 
 module.exports = UpgradeGame;

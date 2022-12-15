@@ -21,7 +21,14 @@ const OutputView = {
     Console.print(`${GAME_MESSAGE.showMiniResult(randomNumber, result)}\n`);
   },
   printUpgradeResult(isSuccess, percent) {
-    Console.print(GAME_MESSAGE.showEnforceResult(isSuccess, percent));
+    Console.print(`${GAME_MESSAGE.showEnforceResult(isSuccess, percent)}\n`);
+  },
+  printGameResult(grade) {
+    Console.print(GAME_MESSAGE.showGameResult(grade));
+    Console.close();
+  },
+  printMessage(message) {
+    Console.print(message);
   },
 };
 
