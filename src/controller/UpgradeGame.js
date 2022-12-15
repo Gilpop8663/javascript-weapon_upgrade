@@ -1,4 +1,5 @@
 const { GAME_STRING } = require('../Constant');
+const generateMiniGameNumber = require('../generateMiniGameNumber');
 const ItemGrade = require('../model/ItemGrade');
 const Validation = require('../Validation');
 const {
@@ -40,6 +41,8 @@ class UpgradeGame {
 
   checkMiniGameCommand(command) {
     Validation.miniGame(command);
+    const randomNumber = generateMiniGameNumber();
+    console.log(randomNumber);
     console.log(command);
   }
 
