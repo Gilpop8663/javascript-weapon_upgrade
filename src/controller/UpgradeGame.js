@@ -1,3 +1,4 @@
+const Validation = require('../Validation');
 const { readChallengeCommand } = require('../view/InputView');
 const { printStart } = require('../view/OutputView');
 
@@ -8,6 +9,7 @@ class UpgradeGame {
   }
 
   checkChellengeCommand(command) {
+    Validation.challengeCommand(command);
     console.log(command);
   }
 }
