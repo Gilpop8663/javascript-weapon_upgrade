@@ -1,6 +1,8 @@
 const { GAME_STRING } = require('../Constant');
 const generateMiniGameNumber = require('../generateMiniGameNumber');
 const ItemGrade = require('../model/ItemGrade');
+const { isUpgraded } = require('../UpgradeUtils');
+const UpgradeUtils = require('../UpgradeUtils');
 const Validation = require('../Validation');
 const {
   readChallengeCommand,
@@ -72,6 +74,8 @@ class UpgradeGame {
   showUpgradeResult() {
     const percent = this.#itemGrade.getPercent();
     console.log(percent);
+    const isUpgrade = isUpgraded(percent);
+    console.log(isUpgrade);
   }
 
   endGame() {}
