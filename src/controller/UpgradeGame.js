@@ -2,7 +2,6 @@ const { GAME_STRING } = require('../Constant');
 const generateMiniGameNumber = require('../generateMiniGameNumber');
 const ItemGrade = require('../model/ItemGrade');
 const { isUpgraded } = require('../UpgradeUtils');
-const Validation = require('../Validation');
 const {
   readChallengeCommand,
   readMiniGameInput,
@@ -14,7 +13,6 @@ const {
   printMiniGameSniffling,
   printUpgradeResult,
   printGameResult,
-  printMessage,
 } = require('../view/OutputView');
 
 class UpgradeGame {
@@ -36,37 +34,13 @@ class UpgradeGame {
   }
 
   checkChellengeCommand(command) {
-    try {
-      Validation.challengeCommand(command);
-      this.challengeCommandBranch(command);
-    } catch (error) {
-      printMessage(error.message);
-      readChallengeCommand(this.checkChellengeCommand.bind(this));
-    }
-  }
-
-  challengeCommandBranch(command) {
     if (command === GAME_STRING.challenge) {
-      return this.upgrade();
+      return readMiniGameInput(this.checkMiniGameCommand.bind(this));
     }
     return this.endGame();
   }
 
-  upgrade() {
-    readMiniGameInput(this.checkMiniGameCommand.bind(this));
-  }
-
   checkMiniGameCommand(command) {
-    try {
-      Validation.miniGame(command);
-      this.miniGameCommandBranch(command);
-    } catch (error) {
-      printMessage(error.message);
-      readMiniGameInput(this.checkMiniGameCommand.bind(this));
-    }
-  }
-
-  miniGameCommandBranch(command) {
     const randomNumber = generateMiniGameNumber();
     const isNotNumber = Number.isNaN(Number(command));
     if (isNotNumber) {
